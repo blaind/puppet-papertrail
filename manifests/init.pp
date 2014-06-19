@@ -36,8 +36,16 @@ class papertrail (
     ensure => present,
   }
 
-  package { 'rubygems':
-    ensure => present,
+  if ($::lsbdistrelease < 14.04) {
+    package { 'rubygems':
+      ensure => present,
+      notify => Package['remote_syslog'],
+    }
+  } else {
+    package { 'ruby':
+      ensure => present,
+      notify => Package['remote_syslog'],
+    }
   }
 
   package { 'libssl-dev':
@@ -52,7 +60,6 @@ class papertrail (
     ensure   => present,
     provider => 'gem',
     require  => [
-      Package['rubygems'],
       Package['gcc'],
       Package['libssl-dev'],
     ],
