@@ -5,8 +5,8 @@ $ActionSendStreamDriverAuthMode x509/name
 
 $ActionResumeInterval 10
 $ActionQueueSize <%= queue_size %>
-$ActionQueueDiscardMark <%= (queue_size * 0.975).round %>
-$ActionQueueHighWaterMark <%= (queue_size * 0.8).round %>
+$ActionQueueDiscardMark <%= (queue_size.to_i * 0.975).round %>
+$ActionQueueHighWaterMark <%= (queue_size.to_i * 0.8).round %>
 $ActionQueueType LinkedList
 $ActionQueueFileName papertrailqueue
 $ActionQueueCheckpointInterval 100
