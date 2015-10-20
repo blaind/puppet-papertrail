@@ -3,6 +3,7 @@ $ActionSendStreamDriver gtls
 $ActionSendStreamDriverMode 1
 $ActionSendStreamDriverAuthMode x509/name
 
+<% if queue_enabled %>
 $ActionResumeInterval 10
 $ActionQueueSize <%= queue_size %>
 $ActionQueueDiscardMark <%= (queue_size.to_i * 0.975).round %>
@@ -15,5 +16,6 @@ $ActionResumeRetryCount -1
 $ActionQueueSaveOnShutdown on
 $ActionQueueTimeoutEnqueue 2
 $ActionQueueDiscardSeverity 0
+<% end %>
 
 *.*	@@<%= @log_host %>:<%= @log_port %>
